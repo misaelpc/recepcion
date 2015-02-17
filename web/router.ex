@@ -8,18 +8,25 @@ defmodule Reception.Router do
     plug :protect_from_forgery
   end
 
+  #pipeline :api do
+    #plug :accepts, ~w(json)
+  #end
+
   pipeline :api do
-    plug :accepts, ~w(json)
+    plug :accepts, ~w(xml)
   end
 
   scope "/", Reception do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Reception do
-  #   pipe_through :api
-  # end
+   scope "/api", Reception do
+     pipe_through :api
+
+    post "/validar", ValidatorController, :validate
+   end
 end
