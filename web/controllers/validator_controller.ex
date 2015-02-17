@@ -10,7 +10,6 @@ defmodule Reception.ValidatorController do
     request_body = :erlang.bitstring_to_list(document)
 
     try do
-      { xml, _ } = :xmerl_scan.string(request_body)
       {xml,_} = :xmerl_scan.string(request_body)
      
       file_xsd = './BalanzaComprobacion_1_1.xsd'
