@@ -10,7 +10,8 @@ defmodule Reception do
       # Start the endpoint when the application starts
       supervisor(Reception.Endpoint, []),
       # Here you could define other workers and supervisors as children
-      # worker(Reception.Worker, [arg1, arg2, arg3]),
+    worker(Reception.Repo, []),
+
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
