@@ -9,12 +9,14 @@ defmodule Reception.ValidatorController do
     
     file_xsd = './BalanzaComprobacion_1_1.xsd'
 
-    {xml, misc} = :xmerl_scan.string(document)
-	
-	#{ok, xsd} = :xmerl_xsd.process_schema(file_xsd)
-	#{error, message} = :xmerl_xsd.validate(misc, xsd)
+    request_body = :erlang.bitstring_to_list(document)
 
-    json conn, xml
+     {xml,_} = :xmerl_scan.string(request_body)
+	   
+	   {ok, xsd} = :xmerl_xsd.process_schema(file_xsd)
+	   {error, message} = :xmerl_xsd.validate(xml, xsd)
+     IO.inspect message
+    text conn, "exito"
   end
 
 end
