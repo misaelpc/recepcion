@@ -3,9 +3,9 @@ defmodule Reception.Document do
 
   schema "documents" do
     field :rfc, :string
-    field :curp, :string
-    field :calle, :string
-    field :colonia, :string
+    field :nocertificado, :string
+    field :mes, :string
+    field :anio, :string
     field :folio, :string
     field :xmlfile, :binary
   end

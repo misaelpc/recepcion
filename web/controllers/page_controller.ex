@@ -8,26 +8,26 @@ defmodule Reception.PageController do
   end
 
   def save_document(conn, _params) do
-    xml = open_xml
+   #  xml = open_xml
         
-    {:ok, body} = File.read("./doctodig.xml")
-    rfc_emisor = query('/DD:DoctoDigital/DD:Emisor/@ERFC',xml)
-    curp_emisor = query('/DD:DoctoDigital/DD:Emisor/@ECURP',xml)
-    calle = query('/DD:DoctoDigital/DD:Emisor/DD:Domicilio/@ECalle',xml)
-    colonia = query('/DD:DoctoDigital/DD:Emisor/DD:Domicilio/@EColonia',xml)
+   #  {:ok, body} = File.read("./doctodig.xml")
+   #  rfc_emisor = query('/DD:DoctoDigital/DD:Emisor/@ERFC',xml)
+   #  curp_emisor = query('/DD:DoctoDigital/DD:Emisor/@ECURP',xml)
+   #  calle = query('/DD:DoctoDigital/DD:Emisor/DD:Domicilio/@ECalle',xml)
+   #  colonia = query('/DD:DoctoDigital/DD:Emisor/DD:Domicilio/@EColonia',xml)
 
-    secret = encrypt(rfc_emisor)
-    resultado = decrypt(secret)
-    IO.puts resultado
+   #  secret = encrypt(rfc_emisor)
+   #  resultado = decrypt(secret)
+   #  IO.puts resultado
 
-  	document = %Reception.Document{rfc: encrypt(rfc_emisor), 
-                                  curp: encrypt(rfc_emisor),   
-                                 calle: to_string(calle), 
-                               colonia: to_string(colonia), 
-                                 folio: "0001", 
-                               xmlfile: encrypt(to_string(body))}
-  	Reception.Repo.insert(document)
-    text conn, "Guardado Exitosamente"
+  	# document = %Reception.Document{rfc: encrypt(rfc_emisor), 
+   #                                curp: encrypt(rfc_emisor),   
+   #                               calle: to_string(calle), 
+   #                             colonia: to_string(colonia), 
+   #                               folio: "0001", 
+   #                             xmlfile: encrypt(to_string(body))}
+  	# Reception.Repo.insert(document)
+   #  text conn, "Guardado Exitosamente"
   end
 
   def encrypt (plain_file) do
