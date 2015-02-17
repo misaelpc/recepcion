@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:DD="http://esquemas.clouda.sat.gob.mx/archivos/DoctosDigitales/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cat="http://esquemas.clouda.sat.gob.mx/archivos/DoctosDigitales/1/Catalogos" targetNamespace="http://esquemas.clouda.sat.gob.mx/archivos/DoctosDigitales/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://esquemas.clouda.sat.gob.mx/archivos/DoctosDigitales/1/Catalogos" schemaLocation="http://esquemas.clouda.sat.gob.mx/archivos/DoctosDigitales/1/Catalogos/CatDoctoDigital.xsd"/>
+	<xs:element name="DoctoDigital">
+		<xs:annotation>
+			<xs:documentation>Estándar de Documentos Digitales</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Emisor">
+					<xs:annotation>
+						<xs:documentation>Nodo requerido para expresar la información del emisor del documento digital.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EmpleadoDe" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información de la organización a la que pertenece el contribuyente emisor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="EUnidadOrg" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Nodo opcional que permite expresar la unidad organizacional específica a la que pertenece el emisor del documento digital. </xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="EUnidad" use="required">
+													<xs:annotation>
+														<xs:documentation>Atributo requerido que permite expresar el nombre de la unidad organizacional específica a la que pertenece el emisor del documento digital. </xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="254"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ERFCOrg" type="cat:t_RFCPM" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el RFC de la organización a la que pertenece el  emisor del documento digital, sin guiones o espacios.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="EDenORazSocOrg" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar la denominación o razón social de la organización a la que pertenece el emisor del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="254"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Domicilio" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información del domicilio del contribuyente emisor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="ECalle" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el domicilio del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ENumExt" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el número exterior del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="55"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ENumInt" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar el número interior del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="30"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="EColonia" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar la colonia del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ELocalidad" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar la localidad del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ERef" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar la(s) referencia(s) del domicilio del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="1000"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="EMunDel" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el municipio o delegación del contribuyente emisor del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_MunDel">
+												<xs:length value="5"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="EEntidadF" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar la entidad federativa del contribuyente emisor del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_EntidadF">
+												<xs:length value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="EPais" type="cat:c_Pais" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el país del contribuyente emisor del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ECP" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el código postal del contribuyente emisor del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_CP">
+												<xs:length value="5"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="RepresentanteLegal" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información del representante legal del contribuyente emisor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="ERFCRep" type="cat:t_RFCPF" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el RFC del representante legal del contribuyente que emite el documento digital, sin guiones o espacios. Solo acepta RFC de persona física.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ECURPRep" type="cat:t_CURP" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para la clave unica del registro poblacional del representante legal del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="EApellPatRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el apellido paterno del representante legal del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="EApellMatRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el apellido materno del representante legal del contribuyente emisor del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ENombreRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el nombre del representante legal del contribuyente emisor del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="254"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="ERFC" type="cat:t_RFC" use="required">
+							<xs:annotation>
+								<xs:documentation>Atributo requerido para expresar el RFC del contribuyente que emite el documento digital, sin guiones o espacios.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ECURP" type="cat:t_CURP" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional para la clave única del registro poblacional del contribuyente emisor del documento digital, solo aplicable para personas físicas.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="EApellPat" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el apellido paterno del contribuyente emisor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="EApellMat" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el apellido materno del contribuyente emisor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="ENombre" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el nombre del contribuyente emisor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="254"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="EDenORazSoc" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar la denominación o razón social del contribuyente emisor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="254"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="ECorreoE" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar la dirección de correo electrónico del contribuyente emisor del documento digital.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="ENumTel" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el (los) teléfono (s) del contribuyente emisor del documento digital  separados por coma, sin guiones o espacios y a 10 posiciones incluyendo la clave lada.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Receptor" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Nodo opcional para expresar la información del receptor del documento digital.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EmpleadoDe" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información de la organización a la que pertenece el receptor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="RUnidadOrg" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Nodo opcional que permite expresar la unidad organizacional específica a la que pertenece el receptor del documento digital. </xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="RUnidad" use="required">
+													<xs:annotation>
+														<xs:documentation>Atributo requerido que permite expresar el nombre de la unidad organizacional específica a la que pertenece el receptor del documento digital. </xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="254"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="RRFCOrg" type="cat:t_RFCPM" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el RFC de la organización a la que pertenece el  receptor del documento digital.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="RDenORazSocOrg" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar la denominación o razón social de la organización a la que pertenece el receptor del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="254"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Domicilio" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información del domicilio del receptor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="RCalle" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el domicilio de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RNumExt" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el número exterior de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="55"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RNumInt" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar el número interior de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="30"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RColonia" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar la colonia de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RLocalidad" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar la localidad de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RRef" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para expresar la(s) referencia(s) del domicilio de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="1000"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RMunDel" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el municipio o delegación de la organización receptora del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_MunDel">
+												<xs:length value="5"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="REntidadF" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar la entidad federativa de la organización receptora del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_EntidadF">
+												<xs:length value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RPais" type="cat:c_Pais" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el país de la organización receptora del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="RCP" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el código postal de la organización receptora del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="cat:c_CP">
+												<xs:length value="5"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="RepresentanteLegal" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Nodo opcional para expresar la información del representante legal del receptor del documento digital.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="RRFCRep" type="cat:t_RFCPF" use="required">
+										<xs:annotation>
+											<xs:documentation>Atributo requerido para expresar el RFC del representante legal del receptor del documento digital, sin guiones o espacios. Solo acepta RFC de persona física.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="RCURPRep" type="cat:t_CURP" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional para la clave única del registro poblacional del representante legal de la organización receptora del documento digital.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="RApellPatRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el apellido paterno del representante legal de la organización receptora del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RApellMatRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el apellido materno del representante legal de la organización receptora del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="200"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="RNombreRep" use="optional">
+										<xs:annotation>
+											<xs:documentation>Atributo opcional que permite expresar el nombre del representante legal de la organización receptora del documento digital. </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="254"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="RRFC" type="cat:t_RFC" use="required">
+							<xs:annotation>
+								<xs:documentation>Atributo requerido para expresar el RFC del receptor del documento digital, sin guiones o espacios.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="RCURP" type="cat:t_CURP" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional para la clave única del registro poblacional del  receptor del documento digital, solo aplicable para personas físicas.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="RApellPat" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el apellido paterno del receptor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="RApellMat" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el apellido materno del receptor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="RNombre" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el nombre del receptor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="254"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="RDenORazSoc" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar la denominación o razón social del receptor del documento digital. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="254"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="RCorreoE" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar la dirección de correo electrónico del receptor del documento digital.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="RNumTel" use="optional">
+							<xs:annotation>
+								<xs:documentation>Atributo opcional que permite expresar el (los) teléfono (s) del receptor del documento digital separados por coma, sin guones o espacios y a 10 posiciones incluyendo la clave lada.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TipoDoctoDigital" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Nodo requerido donde se ingresa  la información de acuerdo al tipo de documento digital.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:any maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Version" type="xs:string" use="required" fixed="1.0">
+				<xs:annotation>
+					<xs:documentation>Atributo requerido con valor prefijado que indica la versión del estándar bajo el que se encuentra expresada el documento digital.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TipoDoctoDigital" type="cat:c_TipoDoctoDigital" use="required">
+				<xs:annotation>
+					<xs:documentation>Atributo requerido para expresar el tipo del documento digital de acuerdo al catálogo publicado en la página del SAT.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Cert" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Atributo opcional que sirve para incorporar el certificado de sello digital del contribuyente que ampara el documento digital como texto, en formato base 64.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumCert" use="optional">
+				<xs:annotation>
+					<xs:documentation>Atributo opcional para expresar el número de serie del certificado de sello digital del contribuyente.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="FirmaContrib" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Atributo opcional para contener la firma digital del contribuyente del documento digital. La firma deberá ser expresada como una cadena de texto en formato base 64.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
