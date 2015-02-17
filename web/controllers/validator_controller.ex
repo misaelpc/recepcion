@@ -5,18 +5,18 @@ defmodule Reception.ValidatorController do
 
   def validate(conn, _params) do
 
-  	{:ok, document, _conn_details} = Plug.Conn.read_body(conn)
-    
-    file_xsd = './BalanzaComprobacion_1_1.xsd'
+	{:ok, document, _conn_details} = Plug.Conn.read_body(conn)
 
     request_body = :erlang.bitstring_to_list(document)
 
      {xml,_} = :xmerl_scan.string(request_body)
-	   
+	     file_xsd = './BalanzaComprobacion_1_1.xsd'
+
 	   {ok, xsd} = :xmerl_xsd.process_schema(file_xsd)
 	   {error, message} = :xmerl_xsd.validate(xml, xsd)
      IO.inspect message
     text conn, "exito"
+
   end
 
 end
