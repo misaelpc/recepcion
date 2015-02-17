@@ -16,13 +16,13 @@ defmodule Reception.ValidatorController do
       {ok, xsd} = :xmerl_xsd.process_schema(file_xsd)
 
       case :xmerl_xsd.validate(xml, xsd) do 
-        {:error,message} -> Reception.Secure.save(xml,request_body)
-                            text conn, "XML no cumple con la addenda"  
-        {xml,message} -> text conn, "XML Valid"     
+        {:error,message} -> text conn, "XML no cumple con la addenda"  
+        {xml,message} ->  Reception.Secure.save(xml,request_body)
+                          text conn, "XML Valid"     
       end
 
     catch
-      :exit, error -> text conn, "XML INVALIDO"
+      :exit, _ -> text conn, "XML INVALIDO"
     end
   end
 
