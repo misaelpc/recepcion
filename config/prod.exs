@@ -2,9 +2,10 @@ use Mix.Config
 
 config :reception, Reception.Endpoint,
   url: [host: "example.com"],
-  http: [port: System.get_env("PORT")],
-  secret_key_base: "H3GMtn+QWkKYdKO2Br8Xgb4USd5Lz6QprgelqH6n/OnHeXsYQ0c1hGiqm9QHgDNE"
-  
+  http: [port: System.get_env("PORT") || 4000],
+  secret_key_base: "H3GMtn+QWkKYdKO2Br8Xgb4USd5Lz6QprgelqH6n/OnHeXsYQ0c1hGiqm9QHgDNE",
+  server: true
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

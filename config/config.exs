@@ -14,7 +14,7 @@ config :reception, Reception.Endpoint,
 
 config :reception, Reception.Repo,
   database: "recepcion",
-  username: "misaelperezchamorro",
+  username: "hiphoox",
   password: "",
   hostname: "localhost"
 

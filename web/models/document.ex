@@ -2,8 +2,8 @@ defmodule Reception.Document do
   use Ecto.Model
 
   schema "documents" do
-    field :rfc, :string
-    field :nocertificado, :string
+    field :rfc, :binary
+    field :nocertificado, :binary
     field :mes, :string
     field :anio, :string
     field :folio, :string

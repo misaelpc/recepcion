@@ -10,7 +10,7 @@ defmodule Reception.Secure do
                          nocertificado: encrypt(noCertificado),  
                                    mes: to_string(mes), 
                                   anio: to_string(anio), 
-                                 folio: "0001", 
+                                 folio: to_string(Reception.Counter.next_folio), 
                                xmlfile: encrypt(raw_file)}
   	Reception.Repo.insert(document)
   end
@@ -29,9 +29,18 @@ defmodule Reception.Secure do
   end
 
   def query(xpath, xml) do
-    IO.inspect "LEYENDO PATH #{xpath}"
     [result] = :xmerl_xpath.string(xpath, xml)
     elem(result, 8)
   end
 
+  def get_document(id) do
+    document = Reception.Repo.get(Reception.Document, 1)
+    %{rfc: decrypt(document.rfc), 
+                  nocertificado: decrypt(document.nocertificado), 
+                  mes: document.mes, 
+                  anio: document.anio, 
+                  folio: document.folio, 
+                  xmlfile: decrypt(document.xmlfile)}
+  end
+  
 end  

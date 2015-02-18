@@ -15,7 +15,7 @@ defmodule Reception.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Reception, []},
-     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto]]
+     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto, :xmerl, :crypto]]
   end
 
   # Specifies your project dependencies
@@ -25,6 +25,7 @@ defmodule Reception.Mixfile do
     [{:phoenix, "~> 0.9.0"},
      {:cowboy, "~> 1.0"},
      {:postgrex, "~> 0.6.0"},
-     {:ecto, "~> 0.5.1"}]
+     {:ecto, "~> 0.5.1"},
+     {:exrm, "~> 0.15.0"}]
   end
 end
