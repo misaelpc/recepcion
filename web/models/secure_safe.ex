@@ -33,14 +33,24 @@ defmodule Reception.Secure do
     elem(result, 8)
   end
 
-  def get_document(id) do
-    document = Reception.Repo.get(Reception.Document, 1)
+  def get_document_unencrypted(id) do
+    document = Reception.Repo.get(Reception.Document, id)
     %{rfc: decrypt(document.rfc), 
-                  nocertificado: decrypt(document.nocertificado), 
-                  mes: document.mes, 
-                  anio: document.anio, 
-                  folio: document.folio, 
-                  xmlfile: decrypt(document.xmlfile)}
+      nocertificado: decrypt(document.nocertificado),
+      mes: document.mes,
+      anio: document.anio,
+      folio: document.folio,
+      xmlfile: decrypt(document.xmlfile)}
   end
   
+  def get_document_encrypted(id) do
+    document = Reception.Repo.get(Reception.Document, id)
+    %{rfc: to_string(:base64.encode_to_string(document.rfc)),
+      nocertificado: to_string(:base64.encode_to_string(document.nocertificado)),
+      mes: document.mes,
+      anio: document.anio,
+      folio: document.folio,
+      xmlfile: to_string(:base64.encode_to_string(document.xmlfile))}
+  end
+
 end  

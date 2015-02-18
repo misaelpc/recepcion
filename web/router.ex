@@ -28,6 +28,7 @@ defmodule Reception.Router do
      pipe_through :api
 
     post "/validar", ValidatorController, :validate
-    get  "/document/:id", ValidatorController, :document
+    get  "/docencrypted/:id", ValidatorController, :document_encrypted
+    get  "/docunencrypted/:id", ValidatorController, :document_unencrypted
    end
 end

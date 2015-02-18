@@ -23,8 +23,13 @@ defmodule Reception.ValidatorController do
 
   end
 
-  def document(conn, _params) do
-    document = Reception.Secure.get_document(_params["id"])
+  def document_encrypted(conn, _params) do
+    document = Reception.Secure.get_document_encrypted(_params["id"])
+    json conn, document
+  end
+
+  def document_unencrypted(conn, _params) do
+    document = Reception.Secure.get_document_unencrypted(_params["id"])
     json conn, document
   end
 
