@@ -26,6 +26,8 @@ defmodule Reception.Mixfile do
      {:cowboy, "~> 1.0"},
      {:postgrex, "~> 0.6.0"},
      {:ecto, "~> 0.5.1"},
-     {:exrm, "~> 0.15.0"}]
+     {:exrm, "~> 0.15.0"},
+     {:chronos, "~> 0.3.5"},
+     {:uuid, "~> 0.1.5"}]
   end
 end
