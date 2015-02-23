@@ -27,7 +27,11 @@ defmodule Reception.Router do
    scope "/api", Reception do
      pipe_through :api
 
+    post "/chainbuilder", ValidatorController, :chain_builder
     post "/validar", ValidatorController, :validate
+
+    post "/hsm/:chain", HSMController, :sign_dummy
+
     get  "/docencrypted/:id", ValidatorController, :document_encrypted
     get  "/docunencrypted/:id", ValidatorController, :document_unencrypted
    end

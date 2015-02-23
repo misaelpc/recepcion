@@ -33,4 +33,19 @@ defmodule Reception.ValidatorController do
     json conn, document
   end
 
+  def chain_builder(conn, _params) do
+    {:ok, document, _} = Plug.Conn.read_body(conn)
+
+    result = Reception.Covalidator.validate_empty_document(document)
+    		|> Reception.Covalidator.validate_xml_document
+    		|> Reception.Covalidator.extract_seal_document
+    		|> Reception.Covalidator.build_chain_template
+    		|> Reception.Covalidator.get_hsm_sign
+
+    case result do
+    	{:error, message, _xml} ->  text conn, message	
+    	{:ok, message, _xml} ->  text conn, message	
+    end
+  end  
+
 end
