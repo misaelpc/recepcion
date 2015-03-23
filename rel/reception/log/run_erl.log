@@ -1,0 +1,8 @@
+run_erl [1256] Mon Feb 23 14:02:23 2015
+Args before exec of shell:
+run_erl [1256] Mon Feb 23 14:02:23 2015
+argv[0] = sh
+run_erl [1256] Mon Feb 23 14:02:23 2015
+argv[1] = -c
+run_erl [1256] Mon Feb 23 14:02:23 2015
+argv[2] = exec "/Users/misaelperezchamorro/Documents/Diverza/reception/rel/reception/bin/reception" "console"

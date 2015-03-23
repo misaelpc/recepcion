@@ -4,24 +4,23 @@ defmodule Reception.ValidatorController do
   plug :action
 
   def validate(conn, _params) do
-
+    # IO.inspect Router.File.identify()
     {:ok, document, _conn_details} = Plug.Conn.read_body(conn)
     request_body = :erlang.bitstring_to_list(document)
 
     try do
       {xml,_} = :xmerl_scan.string(request_body)
 
-      case Reception.Validator.validate(xml) do 
+      case SchemaValidation.Worker.validate(xml) do 
         {:error,message} -> 
           text conn, "XML no cumple con la addenda"  
-        {:ok} ->  
+        {:ok, "Schema Valid"} ->  
           #Reception.Secure.save(xml,request_body)
           text conn, "XML Valid"     
       end
 
     catch
       :exit, _ ->
-        IO.inspect request_body
         text conn, "XML INVALIDO"
     end
 
