@@ -11,10 +11,10 @@ defmodule Reception.ValidatorController do
     try do
       {xml,_} = :xmerl_scan.string(request_body)
 
-      case Reception.Validator.validate(xml) do 
+      case SchemaValidation.Worker.validate(xml) do
         {:error,message} -> 
           text conn, "XML no cumple con la addenda"  
-        {:ok} ->  
+        {:ok,_} ->  
           #Reception.Secure.save(xml,request_body)
           text conn, "XML Valid"     
       end
