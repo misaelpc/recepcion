@@ -4,7 +4,9 @@ defmodule Reception.ValidatorController do
   plug :action
 
   def validate(conn, _params) do
-    # IO.inspect Router.File.identify()
+    Router.File.start_link(:ok,name: :file_router)
+    IO.inspect Router.Supervisor.identify(:file_router,"Declaration")
+   
     {:ok, document, _conn_details} = Plug.Conn.read_body(conn)
     request_body = :erlang.bitstring_to_list(document)
 

@@ -11,5 +11,5 @@
   "poolboy": {:hex, :poolboy, "1.4.2"},
   "postgrex": {:hex, :postgrex, "0.6.0"},
   "ranch": {:hex, :ranch, "1.0.0"},
-  "schema_validation": {:git, "git://github.com/misaelpc/recepcion_schema_validation.git", "263b43deb30c37ffb741d087edb44585687a691f", []},
+  "schema_validation": {:git, "git://github.com/misaelpc/recepcion_schema_validation.git", "d0ea78127cad42fa36609d08898c04b2f7da0a83", []},
   "uuid": {:hex, :uuid, "0.1.5"}}

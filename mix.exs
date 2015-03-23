@@ -15,7 +15,7 @@ defmodule Reception.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Reception, []},
-     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto, :xmerl, :crypto,:schema_validation]]
+     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto, :xmerl, :crypto,:schema_validation,:router]]
   end
 
   # Specifies your project dependencies
@@ -29,6 +29,8 @@ defmodule Reception.Mixfile do
      {:exrm, "~> 0.15.0"},
      {:chronos, "~> 0.3.5"},
      {:schema_validation, github: "misaelpc/recepcion_schema_validation"},
+     #{:schema_validation, path: "/Users/misaelperezchamorro/Documents/Diverza/AppsRecepcion/recepcion_schema_validation"},
+     {:router, path: "/Users/misaelperezchamorro/Documents/Diverza/AppsRecepcion/recepcion_router"},
      {:uuid, "~> 0.1.5"}]
   end
 end
