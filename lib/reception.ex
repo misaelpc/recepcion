@@ -11,7 +11,7 @@ defmodule Reception do
       supervisor(Reception.Endpoint, []),
       # Here you could define other workers and supervisors as children
     worker(Reception.Repo, []),
-    worker(Reception.Validator, []),
+    #worker(Reception.Validator, []),
     worker(Reception.Counter, []),
     ]
 

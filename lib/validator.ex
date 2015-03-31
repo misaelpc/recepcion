@@ -4,9 +4,11 @@ defmodule Reception.Validator do
   #####
   # External API
   def start_link() do
-    file_xsd = './BalanzaComprobacion_1_1.xsd'
-    {_ok, xsd} = :xmerl_xsd.process_schema(file_xsd)
-    GenServer.start_link( __MODULE__, xsd, name: __MODULE__)
+    GenServer.start_link( __MODULE__, :ok, name: __MODULE__)
+  end
+
+  def init(:ok) do
+    Reception.Schema.start_link('./BalanzaComprobacion_1_1.xsd')
   end
 
   def validate(xml) do
@@ -16,22 +18,23 @@ defmodule Reception.Validator do
   #####
   # GenServer implementation
 
-  def handle_call({:validate, xml}, _from, xsd) do 
-      case :xmerl_xsd.validate(xml, xsd) do 
-        {:error, message} ->
-          #IO.inspect :xmerl_xsd.format_error(message)
-          parse_errors(message,xsd)
-          { :reply, {:error, "Esto salio mal"}, xsd}
-        {_xml,_newState} ->   { :reply, {:ok}, xsd}
-      end
+  def handle_call({:validate, xml}, _from, agent) do
+    xsd = Agent.get(agent, fn result -> result end) 
+    case :xmerl_xsd.validate(xml, xsd) do 
+      {:error, message} ->
+        parse_errors(message)
+        { :reply, {:error, "Esto salio mal"}, xsd}
+      {_xml,_newState} ->   
+        { :reply, {:ok}, xsd}
+    end
   end
 
   def parse_errors([],_), do: []
 
-  def parse_errors([head | tail],xml) do
+  def parse_errors([head | tail]) do
     IO.puts "***********************"
-    IO.inspect :xmerl_xsd.format_error({xml,head})
-    parse_errors(tail,xml)
+    IO.inspect head
+    parse_errors(tail)
   end
 
 end
